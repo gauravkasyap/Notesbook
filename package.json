@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "gsap": "^3.13.0",
+    "pdfjs-dist": "^5.4.394",
+    "react-router-dom": "^7.9.6"
+  }
+}

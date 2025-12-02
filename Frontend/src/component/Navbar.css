@@ -1,0 +1,145 @@
+.head {
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 99;
+  background-color: transparent;
+  box-sizing: border-box;
+  transition: height 1s ease, background-color 1s ease;
+}
+
+.logo {
+  height: 12vh;
+  width: 12vh;
+  border-radius: 50%;
+  margin: 1vh 2vw;
+  overflow: hidden;
+}
+.logo img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  scale: 1.4;
+}
+.login {
+  height: 6vh;
+  width: 25%;
+  border-radius: 8px;
+  margin: 2vh 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.button_signin {
+  height: 6vh;
+  width: 10vw;
+  background-color: #2a43d6;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #1b263b;
+  font-weight: bolder;
+}
+.button_signin:hover {
+  background-color: #3f37c9;
+}
+.button_signin:active {
+  background-color: #4895ef;
+}
+.button_login {
+  height: 6vh;
+  width: 10vw;
+  background-color: #2a43d6;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #1b263b;
+  font-weight: bolder;
+}
+.button_login:hover {
+  background-color: #3f37c9;
+}
+.button_login:active {
+  background-color: #4895ef;
+}
+
+#mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: white;
+  background: transparent;
+  border-radius: 50px;
+  border: none;
+  padding: 0.4rem;
+}
+
+/* keyboard visible focus */
+/* #mode-toggle:focus {
+  outline: 3px solid rgba(21,156,228,0.6);
+  outline-offset: 2px;
+} */
+
+/* ensure toggle icon is visible in light mode too */
+/* body:not(.dark-mode) #mode-toggle {
+  color: #fffdfd;
+} */
+
+/* if you want the toggle to have a subtle hover */
+#mode-toggle:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+/* make the page background dark */
+body.dark-mode {
+  background-color: #0b0b0b !important;
+  color: #ffffff !important;
+}
+
+/* panels are full-screen and likely cover body — change them too */
+body.dark-mode .panel {
+  background: #0b0b0b !important;
+  color: #ffffff !important;
+}
+
+/* header (navbar) */
+body.dark-mode .head {
+  background-color: #111 !important;
+  color: #eaeaea !important;
+}
+
+/* buttons inside header */
+body.dark-mode .button_signin,
+body.dark-mode .button_login,
+body.dark-mode #mode-toggle {
+  background-color: #333 !important;
+  color: #ffffff !important;
+}
+
+/* links */
+body.dark-mode a { color: #fdfeff !important;}
+body.dark-mode h1 { color: #ffffff !important;}
+body.dark-mode h2 { color: #ffffff !important;}
+body.dark-mode h3 { color: #ffffff !important;}
+body.dark-mode h4 { color: #ffffff !important;}
+body.dark-mode p { color: #ffffff !important;}
+
+.user-email {
+  font-size: 0.9rem;
+  color: #e5e5e5;
+  margin-right: 8px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+

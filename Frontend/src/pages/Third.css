@@ -1,0 +1,32 @@
+.Third{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 70vh;
+}
+.upload_pdf{
+    height: 50vh;
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  border: rgb(0, 0, 0) 3px dashed;
+  border-radius: 20px;
+}
+.upload_pdf a{
+    color: #ffd700;
+    text-decoration: none;
+    font-size: 1.8em;
+}
+.upload_icon{
+    height: 2em;
+    width: 2em;
+    fill: #ffd700;
+}
+.Third h1{
+    width: 60vw;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}

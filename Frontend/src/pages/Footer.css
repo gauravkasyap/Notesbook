@@ -1,0 +1,180 @@
+/* Footer.css */
+:root {
+  --bg: #0f1724;
+  --muted: #a8b3c0;
+  --accent: #6c63ff;
+  --card: #0b1220;
+  --text: #e6eef8;
+}
+
+.nm-footer {
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  width: 80%;
+  max-height: 5vh;
+  /* margin-top: 20px; */
+  position: fixed;
+  z-index: 10;
+  overflow: hidden;
+  bottom: 0;
+  background-color: rgba(54, 53, 53, 0.568);
+  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: max-height 400ms ease;
+  margin-left: 10%;
+  padding: 0.6rem 1rem;
+  border-radius: 8px 8px 0 0;
+}
+.nm-footer.expanded{
+  max-height: 70vh;
+}
+.nm-footer__inner {
+  max-width: 1200px;
+  height: 70%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  gap: 25px;
+  justify-content: center;
+  padding: 18px 15px 0;
+}
+
+/* Brand */
+.nm-footer__brand {
+  display: flex;
+}
+.nm-footer__logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  padding: 6px;
+}
+.nm-footer__brand-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.nm-footer__brand-text h3{
+  margin: 0;
+  font-size: 25px;
+}
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 4px 0 0;
+}
+.nav_down_button {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 3%;
+  height: 3%;
+  transition: transform 300ms ease;
+}
+.nm-footer.expanded .nav_down_button {
+  transform: rotate(180deg);
+  
+}
+.nm-footer.expanded .nav_down_button svg {
+  transform: rotate(0deg);
+}
+
+/* Links */
+.nm-footer__links,
+.nm-footer__company {
+  font-size: 15px;
+}
+.nm-footer__links h4,
+.nm-footer__company h4,
+.nm-footer__newsletter h4 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+.nm-footer__links ul,
+.nm-footer__company ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.nm-footer__links li,
+.nm-footer__company li {
+  margin: 8px 0;
+}
+.nm-footer__links a,
+.nm-footer__company a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+}
+.nm-footer__links a:hover,
+.nm-footer__company a:hover {
+  color: var(--accent);
+}
+
+/* Newsletter */
+.nm-newsletter-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: nowrap;
+}
+.nm-input {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 12px;
+  border-radius: 8px;
+  min-width: 0;
+  flex: 1;
+  color: var(--text);
+  outline: none;
+}
+.nm-input::placeholder {
+  color: var(--muted);
+}
+.nm-btn {
+  background: linear-gradient(90deg, var(--accent), #4b6bff);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.nm-btn:hover { transform: translateY(-1px); }
+
+/* Social icons */
+.nm-socials { display: flex; gap: 10px; margin-top: 12px; }
+.nm-social { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background: rgba(255,255,255,0.02); text-decoration:none; }
+.nm-icon { width:20px; height:20px; fill: currentColor; color: var(--muted); }
+
+/* bottom */
+.nm-footer__bottom {
+  border-top: 1px solid rgba(255,255,255,0.03);
+  /* margin-top: 28px; */
+  padding: 18px 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width:1200px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.nm-footer__bottom p { margin: 0; color: var(--muted); font-size: 13px; }
+.nm-footer__bottom-links a { margin-left: 14px; color: var(--muted); text-decoration: none; font-size: 13px; }
+.nm-footer__bottom-links a:hover { color: var(--text); }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .nm-footer__inner { grid-template-columns: 1fr 1fr; }
+  .nm-footer__brand { margin-bottom: 10px; }
+}
+@media (max-width: 560px) {
+  .nm-footer__inner { grid-template-columns: 1fr; gap: 18px; }
+  .nm-newsletter-form { flex-direction: column; }
+  .nm-btn { width: 100%; }
+  .nm-footer__bottom { flex-direction: column; gap: 10px; text-align: center; }
+}

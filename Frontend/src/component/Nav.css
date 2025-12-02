@@ -1,0 +1,81 @@
+
+.nav {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.NAV-details {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    
+}
+
+.NAV-details h4 {
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+/* COMMON STYLE FOR ALL DROPDOWN UL */
+.NAV-details ul {
+    position: absolute;
+    top: 110%;
+    width: 180px;
+    background: rgb(0, 0, 0);
+    list-style: none;
+    border-radius: 6px;
+    padding: 10px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Dropdown list items */
+.NAV-details ul li {
+    padding: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.NAV-details ul li:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* SHOW DROPDOWN ON HOVER */
+.NAV-details:hover ul {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+}
+
+/* ----- CUSTOM DIFFERENT DROPDOWN STYLES (IF YOU USE THEM) ----- */
+.nav-link {
+  text-decoration: none;  /* remove underline */
+  color: inherit;         /* use same color as surrounding text */
+  font-weight: 600;       /* optional: make it match your nav style */
+  margin: 0 16px;         /* optional: spacing */
+  font-size: 20px;      /* optional: adjust size */
+}
+
+.nav-link:hover {
+  text-decoration: underline; /* or keep none if you don't want hover underline */
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+    .nav {
+        display: none;
+    }
+}
