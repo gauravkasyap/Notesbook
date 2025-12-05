@@ -49,7 +49,7 @@ export default function Navbar() {
       </div>
 
       <Nav />
-
+        {/* login/signup or user info/logout */}
       <div className="login">
         {/* accessible toggle button */}
         <button
