@@ -1,5 +1,5 @@
 // Navbar.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Navbar.css";
 import assets from "../assets/image.png";
 import Nav from "./nav.jsx";
