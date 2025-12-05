@@ -1,5 +1,6 @@
 import "./Home.css";
 import { useState } from "react";
+import Scroll from "../component/Scroll.jsx";
 
 function Home() {
   const [SearchQuery, setSearchQuery] = useState("");
@@ -25,6 +26,7 @@ function Home() {
           <button className="button_Base">Search</button>
         </div>
       </div>
+        <Scroll />
     </div>
   );
 }

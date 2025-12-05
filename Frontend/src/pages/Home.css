@@ -7,8 +7,8 @@
 }
 
 .Base {
-  height: 85vh;
-  width: 100vw;
+  height: 65vh;
+  width: 100%;
   align-items: center;
   display: flex;
   justify-content: center;
