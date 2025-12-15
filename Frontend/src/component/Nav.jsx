@@ -1,55 +1,41 @@
+// src/component/Nav.jsx
 import "./Nav.css";
 import { Link } from "react-router-dom";
 
 function Nav() {
   return (
-    <div className="nav">
+    <nav className="nav">
 
-      {/* VEHICLES  */}
+      {/* HOME */}
       <div className="NAV-details">
-         <Link to="/" className="nav-link">Home</Link>
+        <Link to="/" className="nav-link">
+          Home
+        </Link>
       </div>
 
-      {/* SHOPPING TOOL */}
+      {/* EXPLORE NOTES */}
       <div className="NAV-details">
-        <h4>SHOPPING</h4>
-        <ul className="NAV-details-ul2">
-          <li className="NAV1-li2">
-            The devil’s in the details. A classic Hellcat badge...
-          </li>
-          <li className="NAV1-li2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </li>
-          <li className="NAV1-li2">
-            Cumque ad veniam repellat quo molestiae reprehenderit...
-          </li>
-          <li className="NAV1-li2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </li>
-          <li className="NAV1-li2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit...
-          </li>
-        </ul>
+        <p>hii</p>
       </div>
 
-      {/* DODGE MUSCLE */}
+      {/* UPLOAD / SELL */}
       <div className="NAV-details">
-        <h4>DODGE</h4>
-        <ul className="NAV-details-ul3">
-          <div className="div-li3">
-            <li className="NAV1-li3">Hellcat</li>
-            <li className="NAV1-li3">Hellcat</li>
-            <li className="NAV1-li3">Hellcat</li>
-            <li className="NAV1-li3">Hellcat</li>
-          </div>
-        </ul>
+        <p>hello</p>
       </div>
 
-      {/* OWNER */}
+      {/* CREATOR DASHBOARD */}
       <div className="NAV-details">
-        <Link to="/favorite" className="nav-link">Favorites</Link>
+        <p>hjjj</p>
       </div>
-    </div>
+
+      {/* FAVORITES */}
+      <div className="NAV-details">
+        <Link to="/favorite" className="nav-link">
+          Favorites
+        </Link>
+      </div>
+
+    </nav>
   );
 }
 

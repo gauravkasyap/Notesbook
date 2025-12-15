@@ -1,213 +1,489 @@
+/* Auth.css — modern animated signup UI */
+
+/* Page-level background blobs */
 .auth-page {
   min-height: 100vh;
-  background: linear-gradient(120deg,#0b0b0f,#1e1e2f);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 6rem; /* for fixed navbar */
+  padding: 3rem 1rem;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(
+      1200px 600px at 10% 10%,
+      rgba(120, 84, 255, 0.08),
+      transparent 8%
+    ),
+    radial-gradient(
+      800px 400px at 95% 25%,
+      rgba(255, 96, 60, 0.05),
+      transparent 6%
+    ),
+    linear-gradient(180deg, #070711 0%, #0f1220 100%);
 }
 
+/* soft floating blobs */
+.auth-page::before,
+.auth-page::after {
+  content: "";
+  position: absolute;
+  filter: blur(40px);
+  opacity: 0.7;
+  pointer-events: none;
+  transform: translateZ(0);
+}
+.auth-page::before {
+  width: 420px;
+  height: 420px;
+  left: -8%;
+  top: -10%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(74, 198, 255, 0.18),
+    rgba(98, 71, 255, 0.06) 40%,
+    transparent 60%
+  );
+  animation: floatSlow 8s ease-in-out infinite;
+}
+.auth-page::after {
+  width: 380px;
+  height: 380px;
+  right: -6%;
+  bottom: -12%;
+  background: radial-gradient(
+    circle at 70% 70%,
+    rgba(255, 120, 95, 0.12),
+    rgba(180, 88, 255, 0.05) 40%,
+    transparent 65%
+  );
+  animation: floatSlow 10s ease-in-out infinite reverse;
+}
+
+@keyframes floatSlow {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  50% {
+    transform: translateY(-14px) translateX(6px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+}
+
+/* Card */
 .auth-card {
-  background: #111;
-  width: 100%;
-  max-width: 380px;
-  padding: 2rem 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  color: white;
-  height: 80vh;
-  justify-content: center;
+  width: 420px;
+  max-width: calc(100% - 40px);
+  border-radius: 14px;
+  padding: 28px 28px 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  box-shadow: 0 8px 30px rgba(3, 6, 12, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  color: #e9eefb;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  position: relative;
+  z-index: 3;
+  transform-origin: 50% 0%;
+  animation: cardPop 420ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
 }
 
+/* subtle pop animation */
+@keyframes cardPop {
+  from {
+    transform: translateY(10px) scale(0.995);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Headings */
 .auth-card h2 {
+  margin: 0 0 6px;
+  font-size: 1.6rem;
+  letter-spacing: 0.2px;
   text-align: center;
-  margin-bottom: .2rem;
-}
-
-.auth-sub {
-  text-align: center;
-  font-size: .9rem;
-  color: #aaa;
-  margin-bottom: 1.3rem;
-}
-
-.auth-card input {
-  padding: 12px 14px;
-  border-radius: 6px;
-  border: none;
-  background: #222;
-  color: white;
-  outline: none;
-}
-
-.auth-card input::placeholder {
-  color: #888;
-}
-
-.auth-btn {
-  padding: 12px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  background: #2a43d6;
-  font-weight: bold;
-  color: white;
-  margin-top: .6rem;
-}
-
-.auth-btn:hover {
-  background: #3f37c9;
-}
-
-.auth-text {
-  text-align: center;
-  font-size: .85rem;
-  color: #bbb;
-}
-
-.auth-text a {
-  color: #4895ef;
-  text-decoration: none;
-}
-.auth-text a:hover {
-  text-decoration: underline;
-}
-.auth-error {
-  background: #ff4d4d;
-  border-radius: 6px;
   color: #fff;
-  padding: 6px 10px;
-  font-size: .85rem;
+}
+.auth-sub {
+  margin: 0 0 18px;
+  color: rgba(230, 235, 250, 0.6);
+  text-align: center;
+  font-size: 0.92rem;
+  line-height: 1.3;
+}
+
+/* error */
+.auth-error {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 115, 115, 0.12),
+    rgba(255, 80, 80, 0.06)
+  );
+  color: #ffb4b4;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 80, 80, 0.12);
+  margin-bottom: 12px;
+  font-size: 0.95rem;
   text-align: center;
 }
 
+/* Inputs */
+.auth-card input[type="text"],
+.auth-card input[type="email"],
+.auth-card input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.02);
+  color: #eef2ff;
+  font-size: 0.96rem;
+  outline: none;
+  transition: box-shadow 160ms ease, transform 120ms ease,
+    border-color 120ms ease;
+  box-shadow: 0 2px 10px rgba(2, 4, 10, 0.35) inset;
+}
+
+/* focus ring */
+.auth-card input:focus {
+  border-color: rgba(106, 90, 255, 0.9);
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.14);
+  transform: translateY(-1px);
+}
+
+/* password field container to keep icon */
 .pass-field {
   position: relative;
+  display: flex;
+  align-items: center;
 }
-
-.pass-field span {
+.pass-field .toggle-pass {
   position: absolute;
-  top: 10px;
   right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
+  user-select: none;
+  font-size: 1.05rem;
+  opacity: 0.9;
+  transition: transform 120ms ease, opacity 120ms;
+}
+.pass-field .toggle-pass:hover {
+  /* transform: scale(1.01); */
+  opacity: 1;
 }
 
+/* Primary button */
+.auth-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #091228;
+  background: linear-gradient(90deg, #5b6bff, #2ac4ff);
+  box-shadow: 0 10px 28px rgba(43, 96, 255, 0.18);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+.auth-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(43, 96, 255, 0.24);
+}
+.auth-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 18px rgba(43, 96, 255, 0.12);
+}
+
+/* forgot password row */
+.forgot-row {
+  margin-top: 12px;
+  text-align: right;
+  font-size: 0 nine5rem;
+  color: rgba(200, 210, 255, 0.7);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+.forgot-btn {
+  color: rgba(200, 210, 255, 0.7);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 120ms ease;
+  border: none;
+  background: none;
+  font-size: 0.95rem;
+}
+
+/* separator */
 .auth-separator {
   display: flex;
   align-items: center;
-  gap: 8px;
-  /* margin: 1.4rem 0 0.8rem; */
-  color: #777;
-  font-size: 0.8rem;
+  gap: 12px;
+  margin: 16px 0 12px;
+  color: rgba(220, 230, 255, 0.45);
+  font-size: 0.88rem;
 }
-
 .auth-separator span {
   flex: 1;
   height: 1px;
-  background: #333;
+  background: rgba(255, 255, 255, 0.03);
 }
 
+/* social row */
 .social-row {
   display: flex;
-  gap: 0.8rem;
-  /* margin-bottom: 0.6rem; */
-  width: 100%;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 8px;
 }
 
 .social-btn {
-  flex: 1;
+  width: 52px;
+  height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  border-radius: 70px;
+  border-radius: 10px;
   border: none;
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 6px 18px rgba(2, 6, 14, 0.45);
   cursor: pointer;
-  padding: 0.55rem 0.75rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #fff;
-  background: #ca0505;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+  transition: transform 120ms ease, box-shadow 140ms ease, background 140ms;
+}
+.social-btn:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(20, 40, 80, 0.4);
 }
 
-.social-btn .social-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.12);
+/* icon color resets */
+.social-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  display: block;
+  scale: 1.6;
+}
+
+/* brand-specific color hints */
+.social-btn.google {
+  color: #2f32f7;
+  background: linear-gradient(90deg, #fff, #f8f8f8);
+}
+.social-btn.facebook {
+  color: #fff;
+  background: linear-gradient(90deg, #375fb7, #2d5bd6);
+}
+.social-btn.instagram {
+  color: #fff;
+  background: linear-gradient(90deg, #ff8a00, #e1306c);
+}
+.social-btn.github {
+  color: #fff;
+  background: linear-gradient(90deg, #222, #111);
+}
+
+/* social hover glows */
+.social-btn.facebook:hover {
+  box-shadow: 0 14px 36px rgba(45, 91, 214, 0.26);
+}
+.social-btn.instagram:hover {
+  box-shadow: 0 14px 36px rgba(225, 48, 128, 0.22);
+}
+.social-btn.google:hover {
+  box-shadow: 0 14px 36px rgba(30, 30, 30, 0.12);
+}
+.social-btn.github:hover {
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.24);
+}
+
+/* small helper text under social icons */
+.auth-text {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: rgba(230, 235, 250, 0.7);
+  text-align: center;
+}
+
+/* mobile tweaks */
+@media (max-width: 520px) {
+  .auth-card {
+    padding: 20px 18px;
+    width: 96%;
+  }
+  .auth-btn {
+    padding: 12px;
+  }
+  .social-btn {
+    width: 46px;
+    height: 40px;
+  }
+}
+
+/* Accessibility focus */
+.auth-card input:focus,
+.auth-btn:focus,
+.social-btn:focus {
+  outline: 3px solid rgba(99, 102, 241, 0.14);
+  outline-offset: 2px;
+}
+
+/* ---------- Header / global fixes ---------- */
+/* ensure header height stays consistent and doesn't push content */
+:root {
+  --header-height: 70px; /* keep in sync with .head height */
+}
+
+/* If header is fixed, add top padding to body so content isn't hidden */
+body {
+  padding-top: var(--header-height);
+  box-sizing: border-box;
+}
+
+/* Logo area — limit size and remove weird scale so nav is compact */
+.logo {
+  height: var(--header-height); /* match header */
+  width: auto;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.logo img {
+  height: 44px; /* fixed sensible logo height */
+  width: auto;
+  object-fit: contain;
+  transform: none; /* remove 'scale' that stretched it */
+  margin: 0;
+  transition: transform 0.22s ease, filter 0.22s ease;
+  border-radius: 6px;
+}
+
+/* subtle pulse on hover (micro-interaction you asked earlier) */
+.logo img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 20px rgba(90, 110, 255, 0.12));
+}
+
+/* keep header compact on very small screens */
+@media (max-width: 640px) {
+  .logo img {
+    height: 36px;
+  }
+  body {
+    padding-top: 64px;
+  }
+}
+
+/* ensure header stays above content */
+.head {
+  z-index: 1200;
+}
+
+/* ---------- Auth card centering fixes ---------- */
+/* make sure the page container centers the card and doesn't allow header overlap */
+.auth-page {
+  min-height: calc(100vh - var(--header-height));
+  padding: 2.25rem 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Brand colors */
-.social-btn.google {
-  background: #ffffff;
-}
-.social-btn.google .social-icon {
-  scale: 2;
-}
-
-.social-btn.facebook {
-  background: #1877f2;
-}
-.social-btn.facebook .social-icon {
-  background: rgba(0,0,0,0.1);
-  scale: 2;
+/* make card centered and constrained */
+.auth-card {
+  width: 420px;
+  max-width: calc(100% - 40px);
+  margin: 0 auto; /* center horizontally */
+  box-sizing: border-box;
+  position: relative;
+  z-index: 30; /* ensure it's above header blur & blobs */
 }
 
-.social-btn.instagram {
-  background: radial-gradient(circle at 30% 30%, #fdf497 0, #fd5949 45%, #d6249f 70%, #285aeb 100%);
-}
-.social-btn.instagram .social-icon {
-  background: rgba(0,0,0,0.18);
-  scale: 2;
-}
-
-.social-btn.github {
-  background: #24292f;
-}
-.social-btn.github .social-icon {
-  background: #ffffff;
-  scale: 2;
+/* if page layout pushes card to the right, force center with flex */
+/* fallback for pages where other layout rules interfere */
+.auth-page > .auth-card {
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.social-btn:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+/* reduce outer glow so background blobs don't visually push card */
+.auth-page::before,
+.auth-page::after {
+  opacity: 0.6;
 }
 
-.auth-info {
-  background: #1b4332;
-  border-radius: 6px;
-  color: #d8f3dc;
-  padding: 6px 10px;
-  font-size: .85rem;
-  text-align: center;
-  margin-bottom: 0.6rem;
+/* ---------- Input focus / spacing polish ---------- */
+.auth-card input[type="text"],
+.auth-card input[type="email"],
+.auth-card input[type="password"] {
+  margin: 10px 0;
+  background: rgba(255, 255, 255, 0.015);
 }
 
-.forgot-row {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0.5rem;
+/* Keep social row centered and not overflow */
+.social-row {
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.forgot-btn {
-  border: none;
-  background: transparent;
-  color: #4895ef;
-  font-size: 0.8rem;
-  cursor: pointer;
-  padding: 0;
+/* ensure footer/other global containers don't create extra height below page */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
 }
 
-.forgot-btn:hover {
-  text-decoration: underline;
+/* ---------- Optional: fix for very tall background causing bottom scrollbar ----------
+If a faint horizontal/vertical scroll appears because of radial effects or element sizes,
+this reduces that without removing the effect. Remove if you prefer full raw effect. */
+.auth-page::before,
+.auth-page::after {
+  pointer-events: none;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* ---------- Safety: limit maximum page width so centered layout looks correct ---------- */
+main,
+.hero-root,
+.auth-page {
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Small responsive tweaks ---------- */
+@media (max-width: 480px) {
+  .auth-card {
+    width: 96%;
+    padding: 20px;
+  }
+  .auth-card h2 {
+    font-size: 1.3rem;
+  }
+  .auth-sub {
+    font-size: 0.86rem;
+  }
+  .auth-btn {
+    font-size: 0.96rem;
+  }
 }

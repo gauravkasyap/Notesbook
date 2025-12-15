@@ -1,86 +1,100 @@
 .cards-container {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #3e6d99;
-  transition: transform 0.2s;
-  height: 43vh;
-  margin-top: 2%;
-  display: flex;
-  flex-direction: column;
-}
-.cards-container:hover {
-  transform: scale(1.05);
-}
-.card {
-  width: 100%;
-  height: 50%;
-  overflow: hidden;
-  background-color: black;
-}
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.card_overlay {
-  position: absolute;
-  top: 0;
-  opacity: 0;
-  transition: opacity 0.2s;
-  right: 0;
-}
-.cards-container:hover .card_overlay {
-  opacity: 1;
-}
-.favorite-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: white;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s;
-  cursor: pointer;
-}
-.favorite-btn span{
-    scale: 1.5;
+  margin: 0.75rem;
 }
 
-.favorite-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+.card {
+  position: relative;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, translate 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.9);
+}
+
+.card_image {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+}
+
+.card_overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.favorite-btn,
+.like-btn {
+  pointer-events: auto;
+  border: none;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.75);
+  color: #f9fafb;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .favorite-btn.active {
-  color: #ff4757;
+  background: #fb7185;
 }
+
 .card_info {
-  padding: 1rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  padding: 0.9rem 1rem 1rem;
 }
-.card_title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #ffffff;
-  margin: 0;
-}
+
 .card_info h2 {
-  font-size: 1rem;
-  margin: 0;
+  font-size: 0.98rem;
+  margin: 0 0 0.4rem;
+  color: #e5e7eb;
 }
+
 .card_info p {
-  flex-grow: 1;
-  font-size: 0.875rem;
-  color: #cccccc;
-  margin: 0.5rem 0 0 0;
+  margin: 0.1rem 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.price-tag {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.free-label {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.paid-label {
+  color: #facc15;
+  font-weight: 600;
+}
+
+.buy-btn {
+  background: linear-gradient(135deg, #ff0080, #7928ca);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.buy-btn:hover {
+  opacity: 0.85;
 }

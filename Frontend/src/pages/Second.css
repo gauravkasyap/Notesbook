@@ -1,37 +1,201 @@
+/* Second.css - animated upload/chat section */
+
+/* base layout */
 .Second {
-  height: 70vh;
+  position: relative;
   width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  min-height: 68vh;
   display: flex;
-  justify-content: space-around;
   align-items: center;
-}
-.Second h1 {
-  width: 60vw;
-  color: rgb(0, 0, 0);
-  text-align: center;
-}
-.Second .links {
-  height: 50vh;
-  width: 30vw;
-  display: flex;
   justify-content: center;
+  padding: 56px 6vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: #e6eef8;
+  background: linear-gradient(180deg,#071023 0%, #071427 100%);
+}
+
+/* decorative background blobs */
+.sec-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.blob {
+  position: absolute;
+  filter: blur(36px) saturate(130%);
+  opacity: 0.55;
+  transform: translateZ(0);
+  transition: transform 600ms ease;
+}
+.blob--left {
+  width: 420px; height: 420px;
+  left: -8%;
+  top: -10%;
+  background: radial-gradient(circle at 30% 30%, rgba(124,58,237,0.88), rgba(76,201,240,0.28) 50%, transparent 60%);
+  transform: rotate(-8deg);
+}
+.blob--right {
+  width: 360px; height: 360px;
+  right: -6%;
+  bottom: -6%;
+  background: radial-gradient(circle at 70% 70%, rgba(255,140,84,0.16), rgba(124,58,237,0.1));
+}
+
+/* main inner layout: left description, right upload card */
+.sec-inner {
+  position: relative;
+  z-index: 2;
+  width: min(1200px, 96%);
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 36px;
   align-items: center;
-  text-align: center;
-  flex-direction: column;
-  border: rgb(0, 0, 0) 3px dashed;
-  border-radius: 20px;
 }
-.Second .links a {
-  color: #ffd700;
-  text-decoration: none;
-  font-size: 1.8em;
+
+/* left text */
+.sec-text { padding-right: 8px; }
+.sec-title {
+  font-size: 2.25rem;
+  margin: 0 0 12px;
+  color: #fff;
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  text-shadow: 0 6px 30px rgba(2,8,20,0.6);
 }
-.upload {
-  height: 2em;
-  width: 2em;
-  fill: #ffd700;
-  margin-right: 10px;
+.sec-sub {
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 18px;
+  font-size: 1.05rem;
 }
+
+/* features small row */
+.features { display:flex; gap: 12px; margin-top: 18px; flex-wrap:wrap; }
+.feat {
+  min-width: 160px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.02);
+  backdrop-filter: blur(4px);
+}
+.feat strong { display:block; color:#fff; font-size:0.95rem; margin-bottom:6px; }
+.feat span { color: rgba(255,255,255,0.7); font-size:0.88rem; }
+
+/* upload card */
+.upload-card {
+  position: relative;
+  height: 360px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px dashed rgba(255,255,255,0.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor: pointer;
+  transition: transform 320ms cubic-bezier(.2,.9,.2,1), box-shadow 320ms, border-color 260ms;
+  padding: 26px;
+  overflow: visible;
+  box-shadow: 0 12px 40px rgba(3,6,15,0.55);
+}
+
+/* hover tilt & lift */
+.upload-card:hover {
+  transform: translateY(-8px) rotate(-0.4deg);
+  border-color: rgba(124,58,237,0.55);
+  box-shadow: 0 26px 64px rgba(8,12,30,0.6);
+}
+
+/* drag-over state */
+.upload-card.drag-over {
+  border-style: solid;
+  border-color: rgba(76,201,240,0.7);
+  background: linear-gradient(180deg, rgba(76,201,240,0.04), rgba(124,58,237,0.02));
+  transform: translateY(-6px) scale(1.01);
+}
+
+/* inner content */
+.upload-inside { text-align:center; max-width:320px; }
+.upload-icon {
+  width: 76px;
+  height: 76px;
+  color: #ffd54a;
+  fill: currentColor;
+  margin-bottom: 12px;
+  display:block;
+  filter: drop-shadow(0 8px 18px rgba(33,10,67,0.4));
+  animation: iconBounce 1600ms infinite;
+}
+
+/* icon bounce */
+@keyframes iconBounce {
+  0%   { transform: translateY(0) rotate(0deg); }
+  20%  { transform: translateY(-8px) rotate(-2deg); }
+  40%  { transform: translateY(0) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.upload-title { font-weight:700; font-size:1.05rem; color:#fff; margin-bottom:6px; }
+.upload-sub { font-size:0.9rem; color: rgba(255,255,255,0.62); margin-bottom:16px; }
+
+/* CTA row */
+.cta-row { display:flex; gap:10px; justify-content:center; margin-top:10px; }
+.btn { border-radius: 999px; padding: 10px 16px; font-weight:700; cursor:pointer; border: none; }
+.btn-primary {
+  background: linear-gradient(90deg, #7c3aed, #4cc9f0);
+  color: #04101a;
+  box-shadow: 0 10px 30px rgba(124,58,237,0.14);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 48px rgba(124,58,237,0.18); }
+.btn-lg { padding: 12px 18px; font-size: 1rem; }
+.btn-ghost {
+  background: transparent;
+  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* badges */
+.badge {
+  position: absolute;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #04101a;
+  background: linear-gradient(90deg,#ffd54a,#ff9a4a);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+}
+.badge-top { top: 14px; left: 18px; transform: rotate(-4deg); }
+.badge-right { right: 18px; bottom: 18px; transform: rotate(6deg); }
+
+/* status row */
+.status-row { margin-top:12px; min-height: 22px; }
+.status { display:inline-block; padding:6px 10px; border-radius: 999px; font-weight:700; font-size:0.9rem; }
+.status.loading { background: rgba(255,255,255,0.06); color: #fff; }
+.status.success { background: rgba(76,201,240,0.12); color: #4ee1c0; }
+.status.error { background: rgba(255,80,80,0.12); color: #ff8a8a; }
+
+/* small animation when success */
+.upload-card.state-success {
+  animation: successPop 420ms cubic-bezier(.2,.9,.2,1);
+  border-color: rgba(76,201,240,0.5);
+}
+@keyframes successPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.02) rotate(-0.3deg); }
+  100% { transform: scale(1); }
+}
+
+/* enter/initial animation */
+.section-fade { animation: fadeUp 420ms ease-out 1; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* responsive */
+@media (max-width: 980px) {
+  .sec-inner { grid-template-columns: 1fr; gap: 20px; }
+  .upload-card { height: auto; padding: 20px; }
+  .blob--left { display:none; }
+}
+
+/* accessibility focus */
+.upload-card:focus { outline: 3px solid rgba(124,58,237,0.14); outline-offset: 6px; }

@@ -1,145 +1,283 @@
-.head {
-  height: 15vh;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  z-index: 99;
-  background-color: transparent;
-  box-sizing: border-box;
-  transition: height 1s ease, background-color 1s ease;
+/* Navbar.css - modern animated header */
+
+/* ---- variables ---- */
+:root {
+  --bg: rgba(9, 11, 22, 0.85);
+  --glass: rgba(255, 255, 255, 0.04);
+  --accent: #7c3aed; /* primary gradient start */
+  --accent-2: #4cc9f0; /* primary gradient end */
+  --muted: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.04);
 }
 
-.logo {
-  height: 12vh;
-  width: 12vh;
-  border-radius: 50%;
-  margin: 1vh 2vw;
-  overflow: hidden;
+/* header root */
+.head {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  gap: 12px;
+  z-index: 999;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 10, 18, 0.6),
+    rgba(8, 10, 18, 0.25)
+  );
+  backdrop-filter: blur(10px) saturate(120%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 6px 30px rgba(3, 5, 10, 0.45);
+  transition: height 220ms cubic-bezier(0.2, 0.9, 0.2, 1), padding 220ms,
+    background 260ms, box-shadow 260ms;
 }
-.logo img {
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  scale: 1.4;
+
+/* header when scrolled — slightly smaller */
+.head--scrolled {
+  height: 56px;
+  padding: 0 18px;
+  background: rgba(6, 8, 12, 0.82);
+  box-shadow: 0 10px 30px rgba(2, 4, 10, 0.6);
 }
-.login {
-  height: 6vh;
-  width: 25%;
+
+/* left - brand */
+.head-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 180px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.brand-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
   border-radius: 8px;
-  margin: 2vh 2vw;
+  transform-origin: center;
+  transition: transform 320ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+.head--scrolled .brand-logo {
+  transform: scale(0.86);
+}
+
+/* brand text */
+.brand-text {
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  font-size: 18px;
+}
+.brand-text-notes {
+  color: orangered;
+}
+/* center nav container */
+.head-center {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-}
-.button_signin {
-  height: 6vh;
-  width: 10vw;
-  background-color: #2a43d6;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  color: #1b263b;
-  font-weight: bolder;
-}
-.button_signin:hover {
-  background-color: #3f37c9;
-}
-.button_signin:active {
-  background-color: #4895ef;
-}
-.button_login {
-  height: 6vh;
-  width: 10vw;
-  background-color: #2a43d6;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  color: #1b263b;
-  font-weight: bolder;
-}
-.button_login:hover {
-  background-color: #3f37c9;
-}
-.button_login:active {
-  background-color: #4895ef;
+  pointer-events: auto;
 }
 
-#mode-toggle {
+/* nav (your existing .nav) but improved spacing & underline animation */
+.nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+}
+.nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  position: relative;
+  transition: color 160ms ease, transform 140ms ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 2px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  border-radius: 2px;
+  opacity: 0.95;
+}
+.nav-link:hover {
+  color: white;
+  transform: translateY(-2px);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* right controls */
+.head-right {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 12px;
+  min-width: 280px;
+  justify-content: flex-end;
+}
+
+/* search wrapper: let search expand nicely */
+.search-wrap {
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
+}
+
+/* control buttons container */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* toggle mode button */
+.mode-btn {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(0, 0, 0, 0.1)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  padding: 8px;
+  border-radius: 999px;
   cursor: pointer;
-  font-size: 1.2rem;
-  color: white;
-  background: transparent;
-  border-radius: 50px;
+  transition: transform 140ms ease, box-shadow 160ms;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.mode-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* sign up / login buttons */
+.button_signin,
+.button_login {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
   border: none;
-  padding: 0.4rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
-/* keyboard visible focus */
-/* #mode-toggle:focus {
-  outline: 3px solid rgba(21,156,228,0.6);
-  outline-offset: 2px;
-} */
-
-/* ensure toggle icon is visible in light mode too */
-/* body:not(.dark-mode) #mode-toggle {
-  color: #fffdfd;
-} */
-
-/* if you want the toggle to have a subtle hover */
-#mode-toggle:hover {
-  background: rgba(255,255,255,0.05);
+/* primary sign up gradient glow */
+.button_signin {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  box-shadow: 0 10px 28px rgba(124, 58, 237, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.button_signin:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 28px rgba(58, 85, 237, 0.12);
 }
 
-/* make the page background dark */
-body.dark-mode {
-  background-color: #0b0b0b !important;
-  color: #ffffff !important;
+/* neutral outline login */
+.button_login {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 28px rgba(124, 58, 237, 0.12);
+}
+.button_login:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 28px rgba(58, 85, 237, 0.12);
 }
 
-/* panels are full-screen and likely cover body — change them too */
-body.dark-mode .panel {
-  background: #0b0b0b !important;
-  color: #ffffff !important;
+/* profile button style */
+.profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--muted);
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
-
-/* header (navbar) */
-body.dark-mode .head {
-  background-color: #111 !important;
-  color: #eaeaea !important;
-}
-
-/* buttons inside header */
-body.dark-mode .button_signin,
-body.dark-mode .button_login,
-body.dark-mode #mode-toggle {
-  background-color: #333 !important;
-  color: #ffffff !important;
-}
-
-/* links */
-body.dark-mode a { color: #fdfeff !important;}
-body.dark-mode h1 { color: #ffffff !important;}
-body.dark-mode h2 { color: #ffffff !important;}
-body.dark-mode h3 { color: #ffffff !important;}
-body.dark-mode h4 { color: #ffffff !important;}
-body.dark-mode p { color: #ffffff !important;}
-
 .user-email {
-  font-size: 0.9rem;
-  color: #e5e5e5;
-  margin-right: 8px;
-  max-width: 150px;
+  max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+/* smaller screens */
+@media (max-width: 980px) {
+  .head-center {
+    display: none;
+  } /* hide full nav on small screens (show a burger later) */
+  .brand-text {
+    display: none;
+  }
+  .head {
+    padding: 0 12px;
+  }
+  .head--scrolled {
+    padding: 0 12px;
+  }
+}
 
+/* dark-mode overrides (if you use body.dark-mode) */
+body.dark-mode .head {
+  background: linear-gradient(
+    180deg,
+    rgba(6, 8, 12, 0.8),
+    rgba(6, 8, 12, 0.45)
+  );
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* ---- Logo hover pulse animation ---- */
+
+@keyframes logoPulse {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+  70% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.brand-logo {
+  transition: transform 260ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  cursor: pointer;
+}
+
+.brand-logo:hover {
+  animation: logoPulse 0.45s ease-in-out;
+}

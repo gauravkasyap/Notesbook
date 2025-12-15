@@ -1,0 +1,58 @@
+/* NavSearchCompact.css - minimal styling */
+.navsearch-compact { position: relative; display: inline-block; margin-left: 12px; }
+.navsearch-icon {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
+.navsearch-icon:hover { background: rgba(255,255,255,0.03); }
+
+.navsearch-popup {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(2,6,23,0.6);
+  padding: 10px;
+  z-index: 200;
+}
+
+.navsearch-inputwrap { display:flex; gap:8px; align-items:center; }
+.navsearch-input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.03);
+  color: #fff;
+}
+.navsearch-go {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg,#7c3aed,#4cc9f0);
+  color: #041021;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.navsearch-listwrap { margin-top: 8px; max-height: 240px; overflow:auto; }
+.navsearch-list { list-style:none; padding:0; margin:0; }
+.navsearch-list li { padding: 8px 10px; border-radius:8px; cursor:pointer; }
+.navsearch-list li:hover, .navsearch-list li.active { background: rgba(255,255,255,0.03); }
+.navsearch-title { font-weight:700; color:#fff; }
+.navsearch-snippet { font-size: 12px; color: rgba(255,255,255,0.72); margin-top:4px; }
+.navsearch-meta { margin-top:6px; font-size:12px; color: rgba(255,255,255,0.6); display:flex; gap:8px; align-items:center; }
+
+.pill-free { background: rgba(0,200,120,0.15); color: #04d28a; padding:4px 6px; border-radius:6px; font-weight:700; }
+.price { color: #ffd8a8; font-weight:700; }
+.linkish { background: none; border: none; color: #7c3aed; cursor: pointer; text-decoration: underline; padding:0; }
+.navsearch-empty { color: rgba(255,255,255,0.8); padding: 8px; text-align:center; }
+.navsearch-loading { padding: 8px; text-align:center; color: rgba(255,255,255,0.85); }

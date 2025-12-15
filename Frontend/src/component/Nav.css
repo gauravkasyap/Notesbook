@@ -1,81 +1,46 @@
+/* src/component/Nav.css */
 
 .nav {
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
+/* NAV ITEM */
 .NAV-details {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    font-size: 12px;
-    cursor: pointer;
-    border-radius: 6px;
-    
+  display: flex;
+  align-items: center;
 }
 
-.NAV-details h4 {
-    text-transform: uppercase;
-    font-size: 15px;
-    letter-spacing: 1px;
-}
-
-/* COMMON STYLE FOR ALL DROPDOWN UL */
-.NAV-details ul {
-    position: absolute;
-    top: 110%;
-    width: 180px;
-    background: rgb(0, 0, 0);
-    list-style: none;
-    border-radius: 6px;
-    padding: 10px 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease-in-out;
-}
-
-/* Dropdown list items */
-.NAV-details ul li {
-    padding: 10px;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.NAV-details ul li:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* SHOW DROPDOWN ON HOVER */
-.NAV-details:hover ul {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0px);
-}
-
-/* ----- CUSTOM DIFFERENT DROPDOWN STYLES (IF YOU USE THEM) ----- */
+/* NAV LINKS */
 .nav-link {
-  text-decoration: none;  /* remove underline */
-  color: inherit;         /* use same color as surrounding text */
-  font-weight: 600;       /* optional: make it match your nav style */
-  margin: 0 16px;         /* optional: spacing */
-  font-size: 20px;      /* optional: adjust size */
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 4px;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+  border-bottom: 2px solid transparent;
 }
 
 .nav-link:hover {
-  text-decoration: underline; /* or keep none if you don't want hover underline */
+  color: #4cc9f0;
+  border-bottom: 2px solid #4cc9f0;
 }
 
-/* MOBILE RESPONSIVE */
-@media (max-width: 600px) {
-    .nav {
-        display: none;
-    }
+/* ACTIVE STATE (optional) */
+.nav-link.active {
+  color: #4cc9f0;
+  border-bottom: 2px solid #4cc9f0;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .nav {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
 }

@@ -1,20 +1,161 @@
+// Third.jsx
+import React, { useEffect, useRef, useState } from "react";
+import { useAuth } from "../contexts/AuthContext.jsx";
+import { Link, useNavigate } from "react-router-dom";
 import "./Third.css";
 
-function Third() {
+export default function Third() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const cardRef = useRef(null);
+  const floatRef = useRef(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
+
+  // small pointer-parallax for the floating card
+  useEffect(() => {
+    function onMove(e) {
+      const el = floatRef.current;
+      if (!el || !isHovering) return;
+
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / rect.width;
+      const dy = (e.clientY - cy) / rect.height;
+
+      el.style.transform = `translate3d(${dx * 12}px, ${dy * 8}px, 0) rotate(${dx * 1.5}deg)`;
+    }
+
+    if (isHovering) window.addEventListener("pointermove", onMove);
+    else {
+      if (floatRef.current) floatRef.current.style.transform = "";
+    }
+
+    return () => window.removeEventListener("pointermove", onMove);
+  }, [isHovering]);
+
+  // demo "upload" visual
+  function handleUploadDemo(e) {
+    e.preventDefault();
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    setUploaded(false);
+    // quick demo animation
+    setTimeout(() => setUploaded(true), 700);
+    setTimeout(() => setUploaded(false), 2600);
+  }
+
   return (
-    <div className="Third">
-      <div className="upload_pdf">
-        <a href="./upload">
-        <svg className="upload_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-          <path d="M128 128C128 92.7 156.7 64 192 64L341.5 64C358.5 64 374.8 70.7 386.8 82.7L493.3 189.3C505.3 201.3 512 217.6 512 234.6L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 128zM336 122.5L336 216C336 229.3 346.7 240 360 240L453.5 240L336 122.5zM337 327C327.6 317.6 312.4 317.6 303.1 327L239.1 391C229.7 400.4 229.7 415.6 239.1 424.9C248.5 434.2 263.7 434.3 273 424.9L296 401.9L296 488C296 501.3 306.7 512 320 512C333.3 512 344 501.3 344 488L344 401.9L367 424.9C376.4 434.3 391.6 434.3 400.9 424.9C410.2 415.5 410.3 400.3 400.9 391L336.9 327z" />
-        </svg>
-        </a>
-        <a href="./upload"> Share Notes </a>
-        <h2>Sell your notes,shape someone’s future</h2>
+    <section className="Third root">
+      <div className="third-bg">
+        <div className="blob t-left" />
+        <div className="blob t-right" />
+        <div className="radial-overlay" />
       </div>
-      <h1> A smarter way to learn, share, and succeed with high-quality notes from students and creators across the world </h1>
-    </div>
+
+      <div className="third-inner">
+        <div className="third-left">
+          <div className="promo-pill">Sell • Share • Earn</div>
+
+          <h2 className="third-title">
+            A smarter way to learn, <span className="accent">share</span>, and
+            succeed with high-quality notes from students and creators worldwide
+          </h2>
+
+          <p className="third-desc">
+            Upload once — reach thousands. Create study packs, set a price, or
+            offer resources for free. You keep control.
+          </p>
+
+          <div className="third-cta-row">
+            {user ? (
+              <button
+                className="btn primary large"
+                onClick={handleUploadDemo}
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                aria-label="Share notes"
+              >
+                <svg className="btn-icon" viewBox="0 0 24 24" aria-hidden>
+                  <path
+                    d="M12 3l4 4h-3v6h-2V7H8l4-4zm-7 13v3h10v-3h2v3a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3h2z"
+                    fill="currentColor"
+                  />
+                </svg>
+                Share Notes
+              </button>
+            ) : (
+              <Link to="/login" className="btn-link">
+                <button
+                  className="btn ghost large"
+                  onMouseEnter={() => setIsHovering(true)}
+                  onMouseLeave={() => setIsHovering(false)}
+                >
+                  Login to share notes
+                </button>
+              </Link>
+            )}
+
+            <Link to="/create" className="btn-outline-container">
+              <button className="btn outline">Create a Note</button>
+            </Link>
+          </div>
+
+          <ul className="stats">
+            <li>
+              <strong>5k+</strong>
+              <span>notes indexed</span>
+            </li>
+            <li>
+              <strong>1.2k+</strong>
+              <span>active sellers</span>
+            </li>
+            <li>
+              <strong>40+</strong>
+              <span>subjects</span>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          className="third-right"
+          ref={cardRef}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          aria-hidden
+        >
+          <div className="floating-card" ref={floatRef}>
+            <div className={`card-inner ${uploaded ? "card-sent" : ""}`}>
+              <div className="card-top">
+                <span className="tag">Top Notes</span>
+                <span className="pill free">FREE</span>
+              </div>
+
+              <div className="card-preview">
+                <div className="paper-lines" />
+                <div className="paper-lines short" />
+                <div className="paper-lines" />
+              </div>
+
+              <div className="card-meta">
+                <div className="meta-title">Cyber Security — Exam Pack</div>
+                <div className="meta-sub">4.9 • 120 downloads</div>
+              </div>
+
+              <div className="confetti" aria-hidden>
+                <span className="c c1" />
+                <span className="c c2" />
+                <span className="c c3" />
+                <span className="c c4" />
+                <span className="c c5" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
-
-export default Third;

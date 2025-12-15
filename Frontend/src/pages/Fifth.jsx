@@ -1,19 +1,84 @@
+// src/pages/Fifth.jsx
 import "./Fifth.css";
 import According from "../component/According/According";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
-function Fifth() {
+export default function Fifth() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  function handleStartSelling() {
+    if (user) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
+  }
+
   return (
     <div className="fifth-page">
-      <h1>Frequently asked questions</h1>
-      <According />
-      <button className="selling_button">
-        Start Selling{" "}
-        <svg className="right_arrow"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-          <path d="M439.1 297.4C451.6 309.9 451.6 330.2 439.1 342.7L279.1 502.7C266.6 515.2 246.3 515.2 233.8 502.7C221.3 490.2 221.3 469.9 233.8 457.4L371.2 320L233.9 182.6C221.4 170.1 221.4 149.8 233.9 137.3C246.4 124.8 266.7 124.8 279.2 137.3L439.2 297.3z" />
-        </svg>
-      </button>
+      {/* decorative background shapes */}
+      <div className="orb orb-a" />
+      <div className="orb orb-b" />
+      <div className="orb orb-c" />
+
+      <header className="fifth-hero">
+        <h1 className="fifth-title">
+          Frequently Asked <span className="accent">Questions</span>
+        </h1>
+        <p className="fifth-sub">
+          Quick answers to help you sell, buy and manage notes. Still stuck?
+          Reach out to us — we're happy to help.
+        </p>
+      </header>
+
+      <main className="fifth-body">
+        <section className="faq-card">
+          <div className="faq-intro">
+            <h3>Everything you need to know</h3>
+            <p>
+              Browse the most common questions below. Each answer expands with a
+              smooth animation and helpful examples.
+            </p>
+          </div>
+
+          <div className="faq-list-wrap">
+            {/* your existing accordion component */}
+            <According />
+          </div>
+
+          <div className="faq-cta-row">
+            <button
+              className="selling_button"
+              onClick={handleStartSelling}
+              aria-label="Start selling notes"
+            >
+              Start Selling
+              <svg
+                className="right_arrow"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                role="img"
+                aria-hidden
+              >
+                <path
+                  d="M10 6 L16 12 L10 18"
+                  stroke="#0b1020"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+
+            <a className="help-link" href="/contact">
+              Still need help? Contact support →
+            </a>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
-
-export default Fifth;
