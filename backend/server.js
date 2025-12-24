@@ -11,7 +11,7 @@ import Purchase from "./models/Purchase.js";
 
 import Favorite from "./models/Favorite.js";
 import Note from "./models/Note.js";
-
+ 
 dotenv.config();
 
 const app = express();
