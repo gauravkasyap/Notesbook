@@ -9,7 +9,7 @@ export function useNotesContext() {
   if (!ctx) throw new Error("useNotesContext must be used inside NotesProvider");
   return ctx;
 }
-
+  
 const API_URL = "http://localhost:5000/api";
 
 export function NotesProvider({ children }) {
