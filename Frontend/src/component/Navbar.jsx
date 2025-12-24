@@ -6,7 +6,7 @@ import Nav from "./nav.jsx";
 import NavSearch from "./NavSearch.jsx";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
-
+ 
 export default function Navbar() {
   const { user, logout } = useAuth();
 

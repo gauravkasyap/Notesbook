@@ -241,7 +241,7 @@ export default function Profile() {
                           onClick={() => removeBadge(badge)}
                           aria-label={`remove ${badge}`}
                         >
-                          ×
+                          × 
                         </button>
                       </span>
                     ))
@@ -266,6 +266,9 @@ export default function Profile() {
               <div className="stat-item">
                 <span className="stat-number">{favsAnim}</span>
                 <span className="stat-label">Favorites</span>
+              </div>
+              <div className="stat-item">
+                <Link to="/dashboard">Dashboard</Link>
               </div>
             </div>
 

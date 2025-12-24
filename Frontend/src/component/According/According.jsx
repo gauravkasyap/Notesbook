@@ -41,8 +41,8 @@ export default function Accordian() {
                 }
                 className="title"
               >
-                <h3>{dataItem.question}</h3>
-                <span></span>
+                <h5>{dataItem.question}</h5>
+                {/* <span></span> */}
               </div>
               {enableMultiSelection
                 ? multiple.indexOf(dataItem.id) !== -1 && (

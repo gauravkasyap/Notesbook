@@ -1,5 +1,5 @@
 // Third.jsx
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import "./Third.css";

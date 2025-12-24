@@ -1,8 +1,15 @@
 {
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
     "firebase": "^12.6.0",
     "gsap": "^3.13.0",
+    "multer": "^2.0.2",
+    "node-fetch": "^3.3.2",
+    "openai": "^6.15.0",
+    "pdf-parse": "^2.4.5",
     "pdfjs-dist": "^5.4.394",
     "react-router-dom": "^7.9.6"
   },
@@ -10,7 +17,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

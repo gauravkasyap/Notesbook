@@ -13,25 +13,24 @@ function Nav() {
         </Link>
       </div>
 
-      {/* EXPLORE NOTES */}
+      {/* university NOTES */}
       <div className="NAV-details">
-        <p>hii</p>
-      </div>
-
-      {/* UPLOAD / SELL */}
-      <div className="NAV-details">
-        <p>hello</p>
-      </div>
-
-      {/* CREATOR DASHBOARD */}
-      <div className="NAV-details">
-        <p>hjjj</p>
+        <Link to="/university" className="nav-link">
+          University
+        </Link>
       </div>
 
       {/* FAVORITES */}
       <div className="NAV-details">
         <Link to="/favorite" className="nav-link">
           Favorites
+        </Link>
+      </div>
+
+      {/* Contact us */}
+      <div className="NAV-details">
+        <Link to="/contact" className="nav-link">
+          Contact us
         </Link>
       </div>
 

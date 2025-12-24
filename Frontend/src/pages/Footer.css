@@ -135,7 +135,7 @@
   font-size: 13px;
 }
 .nm-btn {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  background: linear-gradient(135deg,#ff3cac,#784ba0,#2b86c5);
   border: none;
   color: #071224;
   padding: 8px 12px;
@@ -146,7 +146,7 @@
 }
 .nm-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(108, 99, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(40, 30, 221, 0.596);
 }
 
 /* socials */

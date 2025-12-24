@@ -23,6 +23,27 @@ const razorpay = new Razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
+// --- MULTER STORAGE FOR NOTES (PDF) ---
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // make sure this folder exists
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const ext = path.extname(file.originalname);
+    cb(null, uniqueSuffix + ext);
+  },
+});
+
+function fileFilter(req, file, cb) {
+  if (file.mimetype === "application/pdf") {
+    cb(null, true);
+  } else {
+    cb(new Error("Only PDF files are allowed"), false);
+  }
+}
+
+const upload = multer({ storage, fileFilter });
 // --- USER PROFILE ROUTES ---
 // (helper + GET + PATCH here)
 
@@ -61,40 +82,49 @@ function avatarFileFilter(req, file, cb) {
   }
 }
 
-const uploadAvatar = multer({ storage: avatarStorage, fileFilter: avatarFileFilter });
+const uploadAvatar = multer({
+  storage: avatarStorage,
+  fileFilter: avatarFileFilter,
+});
 
 // POST /api/users/avatar
 // body: form-data { userId, avatar (file) }
-app.post("/api/users/avatar", uploadAvatar.single("avatar"), async (req, res) => {
-  try {
-    const { userId } = req.body;
-    if (!userId) {
-      // cleanup file if present
-      if (req.file) fs.unlinkSync(req.file.path);
-      return res.status(400).json({ message: "userId is required" });
+app.post(
+  "/api/users/avatar",
+  uploadAvatar.single("avatar"),
+  async (req, res) => {
+    try {
+      const { userId } = req.body;
+      if (!userId) {
+        // cleanup file if present
+        if (req.file) fs.unlinkSync(req.file.path);
+        return res.status(400).json({ message: "userId is required" });
+      }
+
+      if (!req.file) {
+        return res.status(400).json({ message: "avatar file required" });
+      }
+
+      const avatarUrl = `http://localhost:${PORT}/uploads/avatars/${req.file.filename}`;
+
+      // update or create user doc (you already have User model)
+      const user = await User.findOneAndUpdate(
+        { userId },
+        { avatarUrl },
+        { new: true, upsert: true }
+      );
+
+      // return full profile payload so frontend can refresh stats too
+      const payload = await buildUserProfilePayload(userId, user);
+      res.json(payload);
+    } catch (err) {
+      console.error("Avatar upload error:", err);
+      res
+        .status(500)
+        .json({ message: "Avatar upload failed", error: err.message });
     }
-
-    if (!req.file) {
-      return res.status(400).json({ message: "avatar file required" });
-    }
-
-    const avatarUrl = `http://localhost:${PORT}/uploads/avatars/${req.file.filename}`;
-
-    // update or create user doc (you already have User model)
-    const user = await User.findOneAndUpdate(
-      { userId },
-      { avatarUrl },
-      { new: true, upsert: true }
-    );
-
-    // return full profile payload so frontend can refresh stats too
-    const payload = await buildUserProfilePayload(userId, user);
-    res.json(payload);
-  } catch (err) {
-    console.error("Avatar upload error:", err);
-    res.status(500).json({ message: "Avatar upload failed", error: err.message });
   }
-});
+);
 
 
 // --- DB CONNECTION ---
@@ -124,28 +154,6 @@ const userSchema = new mongoose.Schema(
 );
 
 const User = mongoose.model("User", userSchema);
-
-// --- MULTER STORAGE FOR NOTES (PDF) ---
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // make sure this folder exists
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    const ext = path.extname(file.originalname);
-    cb(null, uniqueSuffix + ext);
-  },
-});
-
-function fileFilter(req, file, cb) {
-  if (file.mimetype === "application/pdf") {
-    cb(null, true);
-  } else {
-    cb(new Error("Only PDF files are allowed"), false);
-  }
-}
-
-const upload = multer({ storage, fileFilter });
 
 // --- AUTH ROUTES ---
 
@@ -382,6 +390,7 @@ app.get("/api/users/profile", async (req, res) => {
       user = await User.create({
         userId,
         name: "New User",
+        email: `${userId}@placeholder.local`, // placeholder email
       });
     }
 
@@ -546,7 +555,7 @@ app.get("/api/purchases/check", async (req, res) => {
 // CREATOR EARNINGS DASHBOARD STATS
 app.get("/api/creator/stats", async (req, res) => {
   try {
-    const { userId } = req.query;   // this is Firebase UID or your custom id
+    const { userId } = req.query; // this is Firebase UID or your custom id
 
     if (!userId) {
       return res.status(400).json({ message: "userId is required" });
@@ -577,7 +586,7 @@ app.get("/api/creator/stats", async (req, res) => {
 
     // Aggregate total earnings + total sales from purchases
     const salesAgg = await Purchase.aggregate([
-      { $match: { sellerId: userId } },   // Purchase.sellerId is same userId string
+      { $match: { sellerId: userId } }, // Purchase.sellerId is same userId string
       {
         $group: {
           _id: null,
@@ -587,8 +596,7 @@ app.get("/api/creator/stats", async (req, res) => {
       },
     ]);
 
-    const totalEarnings =
-      salesAgg.length > 0 ? salesAgg[0].totalEarnings : 0;
+    const totalEarnings = salesAgg.length > 0 ? salesAgg[0].totalEarnings : 0;
     const totalSales = salesAgg.length > 0 ? salesAgg[0].totalSales : 0;
 
     // Latest 10 sales

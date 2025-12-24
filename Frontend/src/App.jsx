@@ -14,6 +14,8 @@ import Dashboard from "./backendPage/Dashboard.jsx";
 import SearchResults from "./backendPage/SearchResults.jsx";
 import ProtectedRoute from "./component/ProtectedRoute.jsx";
 import CreatorDashboard from "./backendPage/CreatorDashboard.jsx";
+import PdfChat from "./component/PdfChat.jsx";
+import BrowseNotes from "./backendPage/BrowseNotes.jsx";
 
 
 function App() {
@@ -55,6 +57,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/creatorDashboard" element={<CreatorDashboard />} />
             <Route path="/search" element={<SearchResults />} />
+            <Route path="/pdf-chat" element={<PdfChat />} />
+            <Route path="/browse" element={<BrowseNotes />} />
           </Routes>
         </main>
       </NotesProvider>
