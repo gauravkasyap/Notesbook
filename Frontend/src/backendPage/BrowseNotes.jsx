@@ -1,6 +1,6 @@
 // src/pages/Forth.jsx
 import { useLocation } from "react-router-dom";
-import "../Pages/Forth.css";
+import "../pages/Forth.css";
 import Cards from "../component/cards.jsx";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { searchNotes, getPopularNotes } from "../services/api";
