@@ -267,9 +267,7 @@ export default function Profile() {
                 <span className="stat-number">{favsAnim}</span>
                 <span className="stat-label">Favorites</span>
               </div>
-              <div className="stat-item">
-                <Link to="/dashboard">Dashboard</Link>
-              </div>
+              
             </div>
 
             {error && <div className="profile-error">{error}</div>}

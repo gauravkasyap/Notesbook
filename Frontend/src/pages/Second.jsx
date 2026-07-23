@@ -139,7 +139,7 @@ export default function Second() {
                 // }}
                 type="button"
               >
-                  Go to Chat 
+                 <Link to="/pdf-chat" >Go to Chat </Link> 
               </button>
             </div>
 
