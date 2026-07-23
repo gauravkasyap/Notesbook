@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import "./Navbar.css";
 // import assets from "../assets/logo2.png";
-import Nav from "./nav.jsx";
+import Nav from "./Nav.jsx";
 import NavSearch from "./NavSearch.jsx";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
